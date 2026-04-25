@@ -166,7 +166,7 @@ Yash Patel
 $(Get-Date -Format "yyyy-MM-dd")
 
 ## 🔗 GitHub Repository
-[]
+[https://github.com/yashhpatil03]
 "@ | Out-File -FilePath README.md -Encoding utf8
 
 Write-Host "✅ README.md file created successfully!" -ForegroundColor Green
