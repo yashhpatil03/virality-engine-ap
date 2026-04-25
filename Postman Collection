@@ -1,0 +1,178 @@
+cd C:\Users\yashp\Downloads\virality-engine-api\virality-engine-api
+
+# Create Postman collection file
+@'
+{
+  "info": {
+    "name": "Virality Engine API",
+    "description": "Spring Boot microservice with Redis guardrails for bot interactions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/test/hlw",
+          "host": ["http://localhost:8080"],
+          "path": ["test", "hlw"]
+        }
+      }
+    },
+    {
+      "name": "Create Post",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "posts"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"content\": \"My first post\",\n    \"authorId\": 6,\n    \"authorType\": \"USER\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Add Bot Comment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/comments",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "posts", "1", "comments"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"content\": \"Great post! Thanks for sharing.\",\n    \"authorId\": 1,\n    \"authorType\": \"BOT\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Add User Comment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/comments",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "posts", "1", "comments"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"content\": \"This is really helpful!\",\n    \"authorId\": 6,\n    \"authorType\": \"USER\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Like Post",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/like",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "posts", "1", "like"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": 6\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Virality Score",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/virality-score",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "posts", "1", "virality-score"]
+        }
+      }
+    },
+    {
+      "name": "Get Pending Notifications",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users/6/notifications/pending",
+          "host": ["http://localhost:8080"],
+          "path": ["api", "users", "6", "notifications", "pending"]
+        }
+      }
+    },
+    {
+      "name": "Create Bot (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/bots",
+          "host": ["http://localhost:8080"],
+          "path": ["bots"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"TestBot\",\n    \"personaDescription\": \"A helpful bot\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create User (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/users",
+          "host": ["http://localhost:8080"],
+          "path": ["users"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"testuser\",\n    \"premium\": false\n}"
+        }
+      }
+    }
+  ]
+}
+'@ | Out-File -FilePath "Virality-Engine-API.postman_collection.json" -Encoding utf8
+
+Write-Host "✅ Postman collection created!" -ForegroundColor Green
